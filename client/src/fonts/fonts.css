@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'Rethink-Sans';
+    src: url('RethinkSans-SemiBold.eot');
+    src: url('RethinkSans-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('RethinkSans-SemiBold.woff2') format('woff2'),
+        url('RethinkSans-SemiBold.woff') format('woff'),
+        url('RethinkSans-SemiBold.ttf') format('truetype'),
+        url('RethinkSans-SemiBold.svg#RethinkSans-SemiBold') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rethink-Sans';
+    src: url('RethinkSans-Bold.eot');
+    src: url('RethinkSans-Bold.eot?#iefix') format('embedded-opentype'),
+        url('RethinkSans-Bold.woff2') format('woff2'),
+        url('RethinkSans-Bold.woff') format('woff'),
+        url('RethinkSans-Bold.ttf') format('truetype'),
+        url('RethinkSans-Bold.svg#RethinkSans-Bold') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rethink-Sans';
+    src: url('RethinkSans-Medium.eot');
+    src: url('RethinkSans-Medium.eot?#iefix') format('embedded-opentype'),
+        url('RethinkSans-Medium.woff2') format('woff2'),
+        url('RethinkSans-Medium.woff') format('woff'),
+        url('RethinkSans-Medium.ttf') format('truetype'),
+        url('RethinkSans-Medium.svg#RethinkSans-Medium') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rethink-Sans';
+    src: url('RethinkSans-Regular.eot');
+    src: url('RethinkSans-Regular.eot?#iefix') format('embedded-opentype'),
+        url('RethinkSans-Regular.woff2') format('woff2'),
+        url('RethinkSans-Regular.woff') format('woff'),
+        url('RethinkSans-Regular.ttf') format('truetype'),
+        url('RethinkSans-Regular.svg#RethinkSans-Regular') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}

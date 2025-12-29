@@ -1,0 +1,322 @@
+{
+  "chatbot_config": {
+    "name": "Nexus Clinic Assistant",
+    "version": "1.2",
+    "description": "Virtual assistant for Nexus Clinic - Book appointments and get information",
+    "flows": {
+      "main": {
+        "id": "main",
+        "type": "welcome",
+        "message": "Hello! Welcome to Nexus Clinic. How can I assist you today?",
+        "options": [
+          {
+            "id": "doctor",
+            "label": "Find a Doctor",
+            "icon": "user-plus",
+            "next_flow": "find_doctor_specialty"
+          },
+          {
+            "id": "appointment",
+            "label": "Book Appointment",
+            "icon": "calendar",
+            "next_flow": "appointment_name"
+          },
+          {
+            "id": "contact",
+            "label": "Contact Us",
+            "icon": "phone",
+            "next_flow": "contact_us"
+          },
+          {
+            "id": "about",
+            "label": "About Us",
+            "icon": "info",
+            "next_flow": "about_us"
+          },
+          {
+            "id": "help",
+            "label": "Need Help?",
+            "icon": "help-circle",
+            "next_flow": "need_help"
+          }
+        ]
+      },
+      "contact_us": {
+        "id": "contact_us",
+        "type": "information",
+        "message": "📞 **Contact Nexus Clinic**\n\n📧 Email: contact@nexusclinic.com\n📱 Phone: +1 (555) 123-4567\n📍 Address: 123 Healthcare Ave, Medical District\n\n🕒 Hours:\nMon-Fri: 8:00 AM - 8:00 PM\nSat-Sun: 9:00 AM - 5:00 PM\n\nHow else can I help you?",
+        "options": [
+          {
+            "id": "doctor",
+            "label": "Find a Doctor",
+            "next_flow": "find_doctor_specialty"
+          },
+          {
+            "id": "appointment",
+            "label": "Book Appointment",
+            "next_flow": "appointment_name"
+          },
+          {
+            "id": "main_menu",
+            "label": "Main Menu",
+            "next_flow": "main"
+          }
+        ]
+      },
+      "about_us": {
+        "id": "about_us",
+        "type": "information",
+        "message": "🏥 **About Nexus Clinic**\n\nNexus Clinic is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and expertise.\n\n✨ **Our Services:**\n• Online Appointment Scheduling\n• Teleconsultation with Specialists\n• Comprehensive Health Records\n• 24/7 Patient Support\n\n👨‍⚕️ **Our Team:**\nExperienced doctors across multiple specialties committed to your health and wellbeing.\n\nWhat would you like to do next?",
+        "options": [
+          {
+            "id": "doctor",
+            "label": "Find a Doctor",
+            "next_flow": "find_doctor_specialty"
+          },
+          {
+            "id": "appointment",
+            "label": "Book Appointment",
+            "next_flow": "appointment_name"
+          },
+          {
+            "id": "contact",
+            "label": "Contact Us",
+            "next_flow": "contact_us"
+          }
+        ]
+      },
+      "need_help": {
+        "id": "need_help",
+        "type": "information",
+        "message": "🤝 **How Can We Help?**\n\nI can assist you with:\n\n1️⃣ **Finding a Doctor** - Browse our specialists by specialty\n2️⃣ **Booking Appointments** - Schedule your visit online\n3️⃣ **Contact Information** - Get our phone, email, and address\n4️⃣ **About Our Clinic** - Learn more about our services\n\nPlease select an option below or type your question:",
+        "options": [
+          {
+            "id": "doctor",
+            "label": "Find a Doctor",
+            "next_flow": "find_doctor_specialty"
+          },
+          {
+            "id": "appointment",
+            "label": "Book Appointment",
+            "next_flow": "appointment_name"
+          },
+          {
+            "id": "contact",
+            "label": "Contact Us",
+            "next_flow": "contact_us"
+          },
+          {
+            "id": "about",
+            "label": "About Us",
+            "next_flow": "about_us"
+          }
+        ]
+      },
+      "find_doctor_specialty": {
+        "id": "find_doctor_specialty",
+        "type": "selection",
+        "message": "I'll help you find a doctor. What type of specialist are you looking for?",
+        "options": [
+          {
+            "id": "general",
+            "label": "General Physician",
+            "next_flow": "doctor_list_general"
+          },
+          {
+            "id": "cardiologist",
+            "label": "Cardiologist",
+            "next_flow": "doctor_list_cardiologist"
+          },
+          {
+            "id": "dermatologist",
+            "label": "Dermatologist",
+            "next_flow": "doctor_list_dermatologist"
+          },
+          {
+            "id": "pediatrician",
+            "label": "Pediatrician",
+            "next_flow": "doctor_list_pediatrician"
+          },
+          {
+            "id": "orthopedic",
+            "label": "Orthopedic",
+            "next_flow": "doctor_list_orthopedic"
+          }
+        ]
+      },
+      "doctor_list_general": {
+        "id": "doctor_list_general",
+        "type": "doctor_list",
+        "specialty": "General Physician",
+        "message": "👨‍⚕️ **Available General Physicians:**",
+        "doctors": [],
+        "next_flow": "appointment_name"
+      },
+      "doctor_list_cardiologist": {
+        "id": "doctor_list_cardiologist",
+        "type": "doctor_list",
+        "specialty": "Cardiologist",
+        "message": "❤️ **Available Cardiologists:**",
+        "doctors": [],
+        "next_flow": "appointment_name"
+      },
+      "doctor_list_dermatologist": {
+        "id": "doctor_list_dermatologist",
+        "type": "doctor_list",
+        "specialty": "Dermatologist",
+        "message": "🔬 **Available Dermatologists:**",
+        "doctors": [],
+        "next_flow": "appointment_name"
+      },
+      "doctor_list_pediatrician": {
+        "id": "doctor_list_pediatrician",
+        "type": "doctor_list",
+        "specialty": "Pediatrician",
+        "message": "👶 **Available Pediatricians:**",
+        "doctors": [],
+        "next_flow": "appointment_name"
+      },
+      "doctor_list_orthopedic": {
+        "id": "doctor_list_orthopedic",
+        "type": "doctor_list",
+        "specialty": "Orthopedic",
+        "message": "🦴 **Available Orthopedic Specialists:**",
+        "doctors": [],
+        "next_flow": "appointment_name"
+      },
+      "appointment_name": {
+        "id": "appointment_name",
+        "type": "text_input",
+        "message": "Great! Let's book an appointment. May I have your name?",
+        "input_type": "text",
+        "validation": {
+          "required": true,
+          "min_length": 2,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "save_to": "patient_name",
+        "next_flow": "appointment_phone"
+      },
+      "appointment_phone": {
+        "id": "appointment_phone",
+        "type": "text_input",
+        "message_template": "Thank you, {patient_name}! What's your phone number?",
+        "input_type": "tel",
+        "validation": {
+          "required": true,
+          "pattern": "^[0-9]{10,15}$"
+        },
+        "save_to": "patient_phone",
+        "next_flow": "appointment_email"
+      },
+      "appointment_email": {
+        "id": "appointment_email",
+        "type": "text_input",
+        "message_template": "Got it. And what is your email address, {patient_name}? We'll use this to send your verification link.",
+        "input_type": "email",
+        "validation": {
+          "required": true,
+          "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        },
+        "save_to": "patient_email",
+        "next_flow": "appointment_date_selection"
+      },
+      "appointment_date_selection": {
+        "id": "appointment_date_selection",
+        "type": "selection",
+        "message": "Perfect! What date would you prefer for your appointment?",
+        "options": [
+          {
+            "id": "today",
+            "label": "Today",
+            "next_flow": "appointment_time_today"
+          },
+          {
+            "id": "tomorrow",
+            "label": "Tomorrow",
+            "next_flow": "appointment_time_tomorrow"
+          }
+        ]
+      },
+      "appointment_time_today": {
+        "id": "appointment_time_today",
+        "type": "selection",
+        "message": "Available time slots for today:\n\n• 09:30 AM\n• 11:00 AM\n• 12:30 PM\n• 02:30 PM\n\nWhich time works best for you?",
+        "save_to": "appointment_date",
+        "save_value": "Today",
+        "options": [
+          {
+            "id": "slot_0930",
+            "label": "09:30 AM",
+            "value": "09:30 AM",
+            "save_to": "appointment_time",
+            "next_flow": "appointment_confirmation"
+          },
+          {
+            "id": "slot_1100",
+            "label": "11:00 AM",
+            "value": "11:00 AM",
+            "save_to": "appointment_time",
+            "next_flow": "appointment_confirmation"
+          },
+          {
+            "id": "slot_1230",
+            "label": "12:30 PM",
+            "value": "12:30 PM",
+            "save_to": "appointment_time",
+            "next_flow": "appointment_confirmation"
+          },
+          {
+            "id": "slot_0230",
+            "label": "02:30 PM",
+            "value": "02:30 PM",
+            "save_to": "appointment_time",
+            "next_flow": "appointment_confirmation"
+          }
+        ]
+      },
+      "appointment_time_tomorrow": {
+        "id": "appointment_time_tomorrow",
+        "type": "selection",
+        "message": "Available time slots for tomorrow:\n\n• 10:00 AM\n• 12:00 PM\n• 03:00 PM\n\nWhich time works best?",
+        "save_to": "appointment_date",
+        "save_value": "Tomorrow",
+        "options": [
+          {
+            "id": "slot_1000",
+            "label": "10:00 AM",
+            "value": "10:00 AM",
+            "save_to": "appointment_time",
+            "next_flow": "appointment_confirmation"
+          },
+          {
+            "id": "slot_1200",
+            "label": "12:00 PM",
+            "value": "12:00 PM",
+            "save_to": "appointment_time",
+            "next_flow": "appointment_confirmation"
+          },
+          {
+            "id": "slot_0300",
+            "label": "03:00 PM",
+            "value": "03:00 PM",
+            "save_to": "appointment_time",
+            "next_flow": "appointment_confirmation"
+          }
+        ]
+      },
+      "appointment_confirmation": {
+        "id": "appointment_confirmation",
+        "type": "confirmation",
+        "message_template": "✅ **Verification Email Sent!**\n\n📋 Details:\n• Patient: {patient_name}\n• Doctor: {selected_doctor}\n• Date: {appointment_date}\n• Time: {appointment_time}\n• Phone: {patient_phone}\n\nWe have sent a verification link to your email ({patient_email}). Please click it within 24 hours to confirm your booking.\n\nIs there anything else I can help you with?",
+        "options": [
+          {
+            "id": "main_menu",
+            "label": "Main Menu",
+            "next_flow": "main"
+          }
+        ]
+      }
+    }
+  }
+}
