@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { Check, Download, Share2, Calendar, Clock, User, MapPin, Sparkles, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { generateICS, downloadICS } from '../../utils/calendarUtils';
 
 interface Props {
   data: any;
@@ -89,7 +90,7 @@ export function BookingConfirmation({ data, onNext, onBack }: Props) {
     doc.write(`
       <html>
         <head>
-          <title>Appointment Confirmation - NexusMed</title>
+          <title>Appointment Confirmation - Nexus</title>
           <script src="https://cdn.tailwindcss.com"></script>
           <style>
             @page { size: auto; margin: 20mm; }
@@ -123,7 +124,7 @@ export function BookingConfirmation({ data, onNext, onBack }: Props) {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'NexusMed Appointment Confirmation',
+          title: 'Nexus Clinic Appointment Confirmation',
           text: shareText,
           url: window.location.href,
         });
@@ -154,22 +155,22 @@ export function BookingConfirmation({ data, onNext, onBack }: Props) {
     const endDate = new Date(startDate);
     endDate.setHours(startDate.getHours() + 1); // 1 hour duration
 
-    // Format dates for Google Calendar (YYYYMMDDTHHmmss format in UTC)
-    const formatGoogleDate = (date: Date) => {
-      return date.toISOString().replace(/-|:|\.\d+/g, '').slice(0, -1) + 'Z';
-    };
+    // Use ICS generation
+    const icsContent = generateICS({
+      title: `Medical Appointment - ${doctorName}`,
+      description: `Consultation with ${doctorName} (${specialization})\n\nPatient: ${data.patientName}\nEmail: ${data.patientEmail}\n\nThis is a virtual consultation via Zoom. You will receive the meeting link via email.`,
+      location: 'Virtual Consultation (Nexus Clinic)',
+      startDate,
+      durationMinutes: 60,
+      organizer: { name: 'Nexus Clinic', email: 'noreply@nexusclinic.com' },
+      attendees: [
+        { name: data.patientName, email: data.patientEmail },
+        // Try to include doctor email if available, otherwise just name
+        { name: doctorName, email: saved?.doctor?.email || 'doctor@nexusclinic.com' }
+      ]
+    });
 
-    // Build Google Calendar URL
-    const title = encodeURIComponent(`Medical Appointment - ${doctorName}`);
-    const description = encodeURIComponent(`Consultation with ${doctorName} (${specialization})\n\nPatient: ${data.patientName}\nEmail: ${data.patientEmail}\n\nThis is a virtual consultation via Zoom. You will receive the meeting link via email.`);
-    const location = encodeURIComponent('Virtual Consultation (NexusMed Clinic)');
-    const startTime = formatGoogleDate(startDate);
-    const endTime = formatGoogleDate(endDate);
-
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${description}&location=${location}&dates=${startTime}/${endTime}`;
-
-    // Open Google Calendar in new tab
-    window.open(googleCalendarUrl, '_blank');
+    downloadICS(icsContent, 'appointment.ics');
   };
 
   return (

@@ -111,7 +111,7 @@ export function SignupPage() {
                         {isSuccess ? 'Registration Complete!' : step === 1 ? 'Create Account' : 'Personal Information'}
                     </h2>
                     <p className="mt-2 text-slate-600">
-                        {isSuccess ? 'Welcome to NexusMed Clinic!' : step === 1 ? 'Step 1: Account Details' : 'Step 2: Complete Your Profile'}
+                        {isSuccess ? 'Welcome to Nexus Clinic!' : step === 1 ? 'Step 1: Account Details' : 'Step 2: Complete Your Profile'}
                     </p>
                 </div>
 

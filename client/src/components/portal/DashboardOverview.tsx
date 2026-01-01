@@ -1,39 +1,43 @@
 import { motion } from 'motion/react';
-import { Calendar, FileText, MessageSquare, Pill } from 'lucide-react';
+import { Calendar, FileText, Pill } from 'lucide-react';
 
-export function DashboardOverview() {
+interface DashboardOverviewProps {
+  onTabChange: (tab: string) => void;
+  data: {
+    appointments: number;
+    records: number;
+    prescriptions: number;
+  };
+}
+
+export function DashboardOverview({ onTabChange, data }: DashboardOverviewProps) {
   const stats = [
     {
       icon: Calendar,
       label: 'Upcoming Appointments',
-      value: '3',
-      change: '+1 this week',
+      value: data.appointments.toString(),
+      change: data.appointments > 0 ? 'View schedule' : 'No upcoming',
       color: 'from-blue-500 to-blue-600',
       bgColor: 'bg-blue-50',
+      tab: 'appointments'
     },
     {
       icon: FileText,
       label: 'Medical Records',
-      value: '24',
-      change: '2 new reports',
+      value: data.records.toString(),
+      change: data.records > 0 ? 'View history' : 'No records yet',
       color: 'from-emerald-500 to-emerald-600',
       bgColor: 'bg-emerald-50',
-    },
-    {
-      icon: MessageSquare,
-      label: 'Unread Messages',
-      value: '5',
-      change: 'from Dr. Johnson',
-      color: 'from-purple-500 to-purple-600',
-      bgColor: 'bg-purple-50',
+      tab: 'records'
     },
     {
       icon: Pill,
       label: 'Active Prescriptions',
-      value: '2',
-      change: 'Refill due soon',
+      value: data.prescriptions.toString(),
+      change: data.prescriptions > 0 ? 'View details' : 'None active',
       color: 'from-amber-500 to-amber-600',
       bgColor: 'bg-amber-50',
+      tab: 'records' // Assuming prescriptions are in records
     },
   ];
 
@@ -42,6 +46,7 @@ export function DashboardOverview() {
       {stats.map((stat, index) => (
         <motion.div
           key={stat.label}
+          onClick={() => onTabChange(stat.tab)}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
@@ -57,13 +62,6 @@ export function DashboardOverview() {
               <stat.icon className="w-6 h-6 text-white" />
             </motion.div>
 
-            {stat.label === 'Unread Messages' && parseInt(stat.value) > 0 && (
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-3 h-3 bg-red-500 rounded-full"
-              />
-            )}
           </div>
 
           <div className="medical-number mb-1">{stat.value}</div>

@@ -35,34 +35,60 @@ export const createUsers = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    const { id, age, gender, phone, address } = req.body;
+    const { name, age, gender, phone, address, image } = req.body;
+    const id = req.userId; // Use ID from verified token
+
     console.log("Updating profile for ID:", id);
-    console.log("Payload:", { age, gender, phone, address });
+    console.log("Payload:", { name, age, gender, phone, address, image: image ? "Data present" : "None" });
 
     // Find patient by ID and update
     const updatedUser = await Patient.findByIdAndUpdate(
       id,
-      { $set: { age, gender, phone, address } },
-      { new: true }
+      { $set: { name, age, gender, phone, address, image } },
+      { new: true, runValidators: true }
     );
 
     if (!updatedUser) {
-      console.log("User not found for ID:", id);
       return res.status(404).json({
         success: false,
         message: "User not found"
       });
     }
 
-    console.log("Profile updated successfully for ID:", id);
-
     res.status(200).json({
       success: true,
       message: "Profile updated successfully",
-      User: updatedUser
+      user: {
+        id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        role: updatedUser.role,
+        phone: updatedUser.phone,
+        age: updatedUser.age,
+        gender: updatedUser.gender,
+        address: updatedUser.address,
+        image: updatedUser.image,
+      }
     });
   } catch (error) {
     console.error("Error updating profile:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
+export const getAllPatients = async (req, res) => {
+  try {
+    const patients = await Patient.find({ role: 'patient' }).select('-password');
+    res.status(200).json({
+      success: true,
+      count: patients.length,
+      data: patients
+    });
+  } catch (error) {
+    console.error("Error fetching patients:", error);
     res.status(500).json({
       success: false,
       message: "Server error"
@@ -88,8 +114,10 @@ export const login = async (req, res) => {
     });
 
     const token = jwt.sign({
-      id: user._id,
-      role: user.role || 'patient' // Include role in token
+      userId: user._id,
+      email: user.email,
+      name: user.name,
+      role: user.role || 'patient'
     }, process.env.JWT_SECRET, {
       expiresIn: "3d",
     });
@@ -107,6 +135,7 @@ export const login = async (req, res) => {
         age: user.age,
         gender: user.gender,
         address: user.address,
+        image: user.image
       },
     });
   } catch (err) {

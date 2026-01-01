@@ -9,8 +9,8 @@ export const DoctorSidebar: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   const menu = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'appointments', label: 'Appointments' },
+    { id: 'reports', label: 'Patient Reports' },
     { id: 'patients', label: 'Patients' },
-    { id: 'messages', label: 'Messages' },
     { id: 'settings', label: 'Settings' },
   ];
 

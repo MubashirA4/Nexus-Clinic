@@ -1,4 +1,6 @@
 import Admin from "../models/admin.js";
+import Patient from "../models/patient.js";
+import Doctor from "../models/doctors.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -47,6 +49,59 @@ export const createAdmin = async (req, res) => {
             message: error.message || "Server error"
         });
     }
+}
+
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const patients = await Patient.find({}, 'name email role createdAt image');
+        const doctors = await Doctor.find({}, 'name email role createdAt photo');
+        const admins = await Admin.find({}, 'name email role createdAt');
+
+        // Normalize data structure
+        const normalizedPatients = patients.map(p => ({
+            _id: p._id,
+            name: p.name,
+            email: p.email,
+            role: 'patient',
+            image: p.image,
+            createdAt: p.createdAt
+        }));
+
+        const normalizedDoctors = doctors.map(d => ({
+            _id: d._id,
+            name: d.name,
+            email: d.email,
+            role: 'doctor',
+            image: d.photo,
+            createdAt: d.createdAt
+        }));
+
+        const normalizedAdmins = admins.map(a => ({
+            _id: a._id,
+            name: a.name,
+            email: a.email,
+            role: 'admin',
+            createdAt: a.createdAt
+        }));
+
+        const allUsers = [...normalizedPatients, ...normalizedDoctors, ...normalizedAdmins];
+
+        // Sort by creation date (newest first)
+        allUsers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        res.status(200).json({
+            success: true,
+            count: allUsers.length,
+            data: allUsers
+        });
+    } catch (error) {
+        console.error("Error fetching all users:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+    }
 };
 
 export const adminLogin = async (req, res) => {
@@ -82,7 +137,7 @@ export const adminLogin = async (req, res) => {
         // Create JWT token
         const token = jwt.sign(
             {
-                id: admin._id,
+                userId: admin._id,
                 email: admin.email,
                 role: admin.role,
                 name: admin.name
@@ -108,6 +163,48 @@ export const adminLogin = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Server error during login"
+        });
+    }
+};
+
+export const updateAdminProfile = async (req, res) => {
+    try {
+        const { name, email, image } = req.body;
+        const adminId = req.userId; // From verifyToken middleware
+
+        // Find admin
+        const admin = await Admin.findById(adminId);
+        if (!admin) {
+            return res.status(404).json({
+                success: false,
+                message: "Admin not found"
+            });
+        }
+
+        // Update fields
+        if (name) admin.name = name;
+        if (email) admin.email = email;
+        if (image) admin.image = image; // Assuming image is sent as base64 string or url
+
+        // Save updates
+        const updatedAdmin = await admin.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Profile updated successfully",
+            user: {
+                id: updatedAdmin._id,
+                name: updatedAdmin.name,
+                email: updatedAdmin.email,
+                role: updatedAdmin.role,
+                image: updatedAdmin.image
+            }
+        });
+    } catch (error) {
+        console.error("Error updating admin profile:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error during profile update"
         });
     }
 };

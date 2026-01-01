@@ -11,10 +11,10 @@ export default function Footer() {
     ];
 
     const services = [
-        { label: 'Cardiology', path: '/services/cardiology' },
-        { label: 'Neurology', path: '/services/neurology' },
-        { label: 'Orthopedics', path: '/services/orthopedics' },
-        { label: 'Pediatrics', path: '/services/pediatrics' },
+        { label: 'Appointment Scheduling', path: '/services/appointment-scheduling' },
+        { label: 'Teleconsultation', path: '/services/teleconsultation' },
+        { label: 'Calendar Management', path: '/services/calendar-management' },
+        { label: 'Patient Records', path: '/services/patient-records' },
         { label: 'All Services', path: '/services' },
     ];
 
@@ -188,14 +188,14 @@ export default function Footer() {
                             </motion.a>
 
                             <motion.a
-                                href="mailto:info@nexusmed.com"
+                                href="mailto:info@nexusclinic.com"
                                 whileHover={{ x: 5 }}
                                 className="flex items-center space-x-3 text-slate-400 hover:text-white transition-colors group"
                             >
                                 <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center group-hover:bg-[rgba(139,92,246,0.12)] transition-colors">
                                     <Mail className="w-5 h-5" />
                                 </div>
-                                <span>info@nexusmed.com</span>
+                                <span>info@nexusclinic.com</span>
                             </motion.a>
 
                             <motion.div

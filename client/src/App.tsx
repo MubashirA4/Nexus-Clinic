@@ -5,7 +5,8 @@ import Footer from './components/ui/Footer';
 import { BookingPage } from './components/pages/BookingPage';
 import { PatientPortal } from './components/pages/PatientPortal';
 import { DoctorProfile } from './components/pages/DoctorProfile';
-import { TelemedicinePage } from './components/pages/TelemedicinePage';
+// import { TelemedicinePage } from './components/pages/TelemedicinePage';
+import ProfilePage from './components/pages/ProfilePage';
 import { AdminPanel } from './components/pages/adminpage/AdminPanel';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { ServiceDetailPage } from './components/pages/ServiceDetailPage';
@@ -15,7 +16,7 @@ import { OurDoctorsPage } from './components/pages/ourDoctorPage';
 import { AboutUs } from './components/pages/AboutUs';
 import { ServicesPage } from './components/pages/ServicesPage';
 import { VerifyAppointment } from './components/pages/VerifyAppointment';
-import ChatWidget from './components/telemedicine/ChatWidget';
+// import ChatWidget from './components/telemedicine/ChatWidget';
 
 // Main App Component with conditional navigation
 function AppContent() {
@@ -45,7 +46,6 @@ function AppContent() {
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/patient-dashboard" element={<ProtectedRoute allowedRoles={["patient"]}><PatientPortal /></ProtectedRoute>} />
           <Route path="/ourdoctors" element={<OurDoctorsPage />} />
-          <Route path="/telemedicine" element={<TelemedicinePage />} />
           <Route path="/admin-dashboard" element={<ProtectedRoute allowedRoles={["admin"]}><AdminPanel /></ProtectedRoute>} />
           <Route path="/doctor-dashboard" element={<ProtectedRoute allowedRoles={["doctor"]}><DoctorProfile /></ProtectedRoute>} />
           <Route path="/services/:service" element={<ServiceDetailPage />} />
@@ -54,6 +54,7 @@ function AppContent() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/verify-appointment" element={<VerifyAppointment />} />
+          <Route path="/profile" element={<ProtectedRoute allowedRoles={["patient", "doctor", "admin"]}><ProfilePage /></ProtectedRoute>} />
         </Routes>
       </main>
 
@@ -62,13 +63,15 @@ function AppContent() {
   );
 }
 
+import { ScrollToTop } from './components/ScrollToTop';
+
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <AppContent />
 
-      {/* Global Chatbot Widget - appears on all pages */}
-      <ChatWidget />
+      {/* Global Chatbot Widget - removed */}
     </Router>
   );
 }

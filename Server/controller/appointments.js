@@ -77,10 +77,13 @@ export const createAppointment = async (req, res) => {
             verificationLink
         });
 
+        // Populate doctor details before sending response
+        await saved.populate('doctor');
+
         res.status(201).json({
             success: true,
             message: 'Verification email sent. Please confirm to finalize booking.',
-            data: { id: saved._id }
+            data: saved
         });
     } catch (error) {
         console.error('Error creating appointment:', error);

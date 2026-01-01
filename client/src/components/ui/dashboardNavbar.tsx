@@ -79,8 +79,12 @@ export function DashboardNavbar() {
                   onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                    {user?.name?.charAt(0) || 'U'}
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden">
+                    {user?.image ? (
+                      <img src={user.image} alt="" className="w-full h-full object-cover object-top" />
+                    ) : (
+                      user?.name?.charAt(0) || 'U'
+                    )}
                   </div>
                   <div className="hidden md:block text-left">
                     <p className="font-medium text-slate-900 text-sm">
@@ -109,8 +113,12 @@ export function DashboardNavbar() {
                       {/* User Info in Dropdown */}
                       <div className="p-4 border-b border-slate-100">
                         <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                            {user?.name?.charAt(0) || 'U'}
+                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg overflow-hidden">
+                            {user?.image ? (
+                              <img src={user.image} alt="" className="w-full h-full object-cover object-top " />
+                            ) : (
+                              user?.name?.charAt(0) || 'U'
+                            )}
                           </div>
                           <div>
                             <p className="font-semibold text-slate-900">{user?.name || 'User'}</p>

@@ -23,6 +23,10 @@ router.post("/add-admin", (req, res, next) => {
     next();
 }, createAdmin);
 
+// Admin Profile Update
+import { updateAdminProfile } from "../controller/admin.js";
+router.put("/profile", updateAdminProfile);
+
 // Doctor management
 router.post("/doctor", addDoctor);
 router.get("/doctors", getDoctors);
@@ -33,6 +37,13 @@ router.delete("/doctor/:id", deleteDoctor);
 // Appointments (Admin)
 router.get('/appointments', getAllAppointments);
 router.put('/appointments/:id/status', updateAppointmentStatus);
+
+// User Management
+import { getAllUsers } from "../controller/admin.js";
+import { getAllPatients } from "../controller/patient.js";
+
+router.get('/users', getAllUsers);
+router.get('/patients', getAllPatients);
 
 // Add other admin routes here (patients, appointments, reports, etc.)
 

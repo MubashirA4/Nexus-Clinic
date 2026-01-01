@@ -1,5 +1,7 @@
 import { motion } from 'motion/react';
 import { Heart, Target, Users, Award, Shield, Clock } from 'lucide-react';
+import ExcellenceIcon from '@/assets/excellence.png';
+import InovationIcon from '@/assets/innovation.png';
 
 export function AboutUs() {
           const stats = [
@@ -17,7 +19,7 @@ export function AboutUs() {
                               color: 'bg-red-50 text-red-600',
                     },
                     {
-                              icon: Target,
+                              icon: ExcellenceIcon,
                               title: 'Excellence in Service',
                               description: 'We strive for excellence in every aspect of our medical services, maintaining the highest standards of quality.',
                               color: 'bg-blue-50 text-blue-600',
@@ -35,7 +37,7 @@ export function AboutUs() {
                               color: 'bg-green-50 text-green-600',
                     },
                     {
-                              icon: Award,
+                              icon: InovationIcon,
                               title: 'Innovation',
                               description: 'We continuously adopt the latest medical technologies and practices to provide state-of-the-art care.',
                               color: 'bg-orange-50 text-orange-600',
@@ -154,7 +156,11 @@ export function AboutUs() {
                                                                                 className="p-8 bg-slate-50 rounded-2xl border border-slate-100 transition-all hover:bg-white hover:shadow-xl group"
                                                                       >
                                                                                 <div className={`w-14 h-14 ${value.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                                                                                          <value.icon className="w-7 h-7" />
+                                                                                          {typeof value.icon === 'string' ? (
+                                                                                                    <img src={value.icon} alt={value.title} className="w-8 h-8 object-contain" />
+                                                                                          ) : (
+                                                                                                    <value.icon className="w-7 h-7" />
+                                                                                          )}
                                                                                 </div>
                                                                                 <h3 className="text-xl font-bold text-slate-900 mb-4">{value.title}</h3>
                                                                                 <p className="text-slate-600 leading-relaxed">

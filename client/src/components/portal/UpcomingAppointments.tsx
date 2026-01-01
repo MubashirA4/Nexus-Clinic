@@ -84,6 +84,8 @@ export function UpcomingAppointments({ fullView = false, onViewAll }: Props) {
     confirmed: { bg: 'bg-green-50', text: 'text-green-700', dot: 'bg-green-500' },
     pending: { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500' },
     cancelled: { bg: 'bg-red-50', text: 'text-red-700', dot: 'bg-red-500' },
+    unverified: { bg: 'bg-blue-50', text: 'text-blue-700', dot: 'bg-blue-500' },
+    completed: { bg: 'bg-slate-50', text: 'text-slate-700', dot: 'bg-slate-500' },
   };
 
   const today = new Date();
@@ -255,7 +257,7 @@ function AppointmentRow({ appointment, index, statusColors }: any) {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className={`absolute -bottom-1 -right-1 w-5 h-5 ${statusColors[appointment.status as keyof typeof statusColors].dot} rounded-full border-2 border-white`} />
+        <div className={`absolute -bottom-1 -right-1 w-5 h-5 ${(statusColors as any)[appointment.status]?.dot || 'bg-slate-300'} rounded-full border-2 border-white`} />
       </motion.div>
 
       <div className="flex-1 min-w-0">
@@ -283,7 +285,7 @@ function AppointmentRow({ appointment, index, statusColors }: any) {
       </div>
 
       <div className="flex-shrink-0">
-        <div className={`${statusColors[appointment.status as keyof typeof statusColors].bg} ${statusColors[appointment.status as keyof typeof statusColors].text} px-3 py-1 rounded-full text-sm capitalize`}>
+        <div className={`${(statusColors as any)[appointment.status]?.bg || 'bg-slate-50'} ${(statusColors as any)[appointment.status]?.text || 'text-slate-600'} px-3 py-1 rounded-full text-sm capitalize`}>
           {appointment.status}
         </div>
       </div>

@@ -31,7 +31,8 @@ export const unifiedLogin = async (req, res) => {
                 phone: patient.phone || null,
                 age: patient.age || null,
                 gender: patient.gender || null,
-                address: patient.address || null
+                address: patient.address || null,
+                image: patient.image || ""
             };
         } else if (doctor) {
             user = doctor;
@@ -160,7 +161,8 @@ export const getProfile = async (req, res) => {
                     phone: user.phone,
                     age: user.age,
                     gender: user.gender,
-                    address: user.address
+                    address: user.address,
+                    image: user.image
                 }),
                 ...(role === 'doctor' && {
                     specialization: user.specialization,

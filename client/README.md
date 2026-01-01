@@ -1,7 +1,7 @@
 
-  # NexusMed Clinic Website Design
+  # Nexus Clinic Website Design
 
-  This is a code bundle for NexusMed Clinic Website Design. The original project is available at https://www.figma.com/design/8EjWug6ngNkUTZMityTpsx/NexusMed-Clinic-Website-Design.
+  This is a code bundle for Nexus Clinic Website Design. The original project is available at https://www.figma.com/design/8EjWug6ngNkUTZMityTpsx/Nexus-Clinic-Website-Design.
 
   ## Running the code
 

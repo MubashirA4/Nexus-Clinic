@@ -77,7 +77,7 @@ export function Navigation() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link key={link.path} to={link.path}>
                   <motion.span
@@ -102,7 +102,7 @@ export function Navigation() {
             </div>
 
             {/* CTA Buttons & User Dropdown */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               {isAuthenticated ? (
                 <div className="relative user-dropdown">
                   <motion.button
@@ -112,8 +112,12 @@ export function Navigation() {
                     className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-colors ${location.pathname === '/' && !scrolled ? 'hover:bg-white/10' : 'hover:bg-slate-100'
                       }`}
                   >
-                    <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold shadow-md">
-                      {user?.name?.charAt(0) || 'U'}
+                    <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold shadow-md overflow-hidden">
+                      {user?.image ? (
+                        <img src={user.image} alt="" className="w-full h-full object-cover object-top" />
+                      ) : (
+                        user?.name?.charAt(0) || 'U'
+                      )}
                     </div>
                     <span className={`font-medium transition-colors ${location.pathname === '/' && !scrolled ? 'text-white' : 'text-slate-700'
                       }`}>
@@ -135,8 +139,12 @@ export function Navigation() {
                       >
                         <div className="p-4 border-b border-slate-100">
                           <div className="flex items-center space-x-3">
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                              {user?.name?.charAt(0) || 'U'}
+                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg overflow-hidden">
+                              {user?.image ? (
+                                <img src={user.image} alt="" className="w-full h-full object-cover object-top" />
+                              ) : (
+                                user?.name?.charAt(0) || 'U'
+                              )}
                             </div>
                             <div>
                               <p className="font-semibold text-slate-900">{user?.name || 'User'}</p>
@@ -215,7 +223,7 @@ export function Navigation() {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsOpen(!isOpen)}
-              className={`md:hidden p-2 rounded-lg transition-colors ${location.pathname === '/' && !scrolled
+              className={`lg:hidden p-2 rounded-lg transition-colors ${location.pathname === '/' && !scrolled
                 ? 'text-white hover:bg-white/10'
                 : 'text-slate-900 hover:bg-slate-100'
                 }`}
@@ -232,7 +240,7 @@ export function Navigation() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white border-t border-slate-200"
+              className="lg:hidden bg-white border-t border-slate-200"
             >
               <div className="px-4 py-4 space-y-3">
                 {navLinks.map((link, index) => (
@@ -265,8 +273,12 @@ export function Navigation() {
                       className="px-4 py-3 border-t border-slate-100"
                     >
                       <div className="flex items-center space-x-3 mb-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                          {user?.name?.charAt(0) || 'U'}
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden">
+                          {user?.image ? (
+                            <img src={user.image} alt="" className="w-full h-full object-cover" />
+                          ) : (
+                            user?.name?.charAt(0) || 'U'
+                          )}
                         </div>
                         <div>
                           <p className="font-semibold text-slate-900">{user?.name || 'User'}</p>

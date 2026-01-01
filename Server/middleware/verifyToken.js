@@ -24,6 +24,8 @@ export const verifyToken = (req, res, next) => {
 
     next();
   } catch (error) {
+    console.error("Token verification failed:", error.message);
+    // console.log("Received token:", token); // detailed debugging
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,

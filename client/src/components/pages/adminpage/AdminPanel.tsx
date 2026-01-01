@@ -10,6 +10,7 @@ import { ManagePatientsPage } from './components/ManagePatientsPage';
 import { AppointmentsPage } from './components/AppointmentsPage';
 import { ReportsPage } from './components/ReportsPage';
 import { SettingsPage } from './components/SettingsPage';
+import { UsersPage } from './components/UsersPage';
 import { DashboardNavbar } from '../../ui/dashboardNavbar';
 
 
@@ -84,6 +85,7 @@ export function AdminPanel() {
                     {activePage === 'Add Doctor' && 'Register New Staff'}
                     {activePage === 'Manage Doctors' && 'Staff Directory & Management'}
                     {activePage === 'Manage Patients' && 'Patient Records'}
+                    {activePage === 'All Users' && 'System Users Directory'}
                     {activePage === 'Appointments' && 'Scheduling System'}
                   </p>
                 </div>
@@ -96,6 +98,7 @@ export function AdminPanel() {
                 {activePage === 'Add Doctor' && <AddDoctorPage />}
                 {activePage === 'Manage Doctors' && <ManageDoctorsPage />}
                 {activePage === 'Manage Patients' && <ManagePatientsPage />}
+                {activePage === 'All Users' && <UsersPage />}
                 {activePage === 'Appointments' && <AppointmentsPage />}
                 {activePage === 'Reports' && <ReportsPage />}
                 {activePage === 'Settings' && <SettingsPage />}

@@ -96,7 +96,12 @@ export const doctorLogin = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
         const token = jwt.sign(
-            { id: doctor._id, role: doctor.role },
+            {
+                userId: doctor._id,
+                email: doctor.email,
+                name: doctor.name,
+                role: doctor.role
+            },
             process.env.JWT_SECRET,
             { expiresIn: "3d" }
         );
@@ -201,6 +206,55 @@ export const getMyPatients = async (req, res) => {
     }
 };
 
+export const getDoctorPatientsDetailed = async (req, res) => {
+    try {
+        const doctorId = req.userId;
+
+        // Fetch all appointments for this doctor, populated with patient details
+        const appointments = await Appointment.find({ doctor: doctorId })
+            .populate('patient', '-password')
+            .sort({ date: -1 });
+
+        // Group by patient to get unique list with most recent appointment
+        const patientsMap = new Map();
+
+        appointments.forEach(app => {
+            const patientKey = app.patient?._id?.toString() || app.patientEmail;
+            if (!patientKey) return;
+
+            if (!patientsMap.has(patientKey)) {
+                patientsMap.set(patientKey, {
+                    id: app.patient?._id || null,
+                    name: app.patient?.name || app.patientName || 'Anonymous',
+                    email: app.patient?.email || app.patientEmail,
+                    phone: app.patient?.phone || app.patientPhone,
+                    image: app.patient?.image || null,
+                    lastVisit: app.date,
+                    lastReason: app.reason,
+                    lastStatus: app.status,
+                    totalAppointments: 1,
+                    gender: app.patient?.gender,
+                    age: app.patient?.age
+                });
+            } else {
+                const p = patientsMap.get(patientKey);
+                p.totalAppointments += 1;
+            }
+        });
+
+        const detailedPatients = Array.from(patientsMap.values());
+
+        res.status(200).json({
+            success: true,
+            count: detailedPatients.length,
+            data: detailedPatients
+        });
+    } catch (error) {
+        console.error('Error in getDoctorPatientsDetailed:', error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
 export const updateProfile = async (req, res) => {
     const id = req.userId;
     try {
@@ -213,7 +267,25 @@ export const updateProfile = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Profile updated",
-            data: updatedDoctor
+            user: {
+                id: updatedDoctor._id,
+                name: updatedDoctor.name,
+                email: updatedDoctor.email,
+                role: updatedDoctor.role || 'doctor',
+                phone: updatedDoctor.phone,
+                image: updatedDoctor.image,
+                specialization: updatedDoctor.specialization,
+                experience: updatedDoctor.experience,
+                bio: updatedDoctor.bio,
+                location: updatedDoctor.location,
+                languages: updatedDoctor.languages,
+                education: updatedDoctor.education,
+                certifications: updatedDoctor.certifications,
+                specializations: updatedDoctor.specializations,
+                gender: updatedDoctor.gender,
+                address: updatedDoctor.address,
+                patients: updatedDoctor.patients
+            }
         });
     } catch (error) {
         res.status(500).json({ message: error.message });

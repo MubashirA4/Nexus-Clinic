@@ -1,6 +1,7 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import { Users, Award, Heart, Clock } from 'lucide-react';
+import TrustIcon from '@/assets/services/good-feedback.png';
 
 function Counter({ end, duration = 2 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -49,7 +50,7 @@ export function StatsSection() {
       color: 'from-emerald-500 to-emerald-600',
     },
     {
-      icon: Award,
+      icon: TrustIcon,
       value: 99,
       suffix: '%',
       label: 'Satisfaction Rate',
@@ -67,7 +68,7 @@ export function StatsSection() {
   return (
     <section className="py-20 bg-white relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-50" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -93,13 +94,19 @@ export function StatsSection() {
               className="relative"
             >
               <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all">
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.6 }}
-                  className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${stat.color} rounded-2xl flex items-center justify-center`}
-                >
-                  <stat.icon className="w-8 h-8 text-white" />
-                </motion.div>
+                {typeof stat.icon === 'string' ? (
+                  <div className={`w-16 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-lg`}>
+                    <img src={stat.icon} alt={stat.label} className="w-8 h-8 object-contain" />
+                  </div>
+                ) : (
+                  <motion.div
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    transition={{ duration: 0.6 }}
+                    className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${stat.color} rounded-2xl flex items-center justify-center`}
+                  >
+                    <stat.icon className="w-8 h-8 text-white" />
+                  </motion.div>
+                )}
 
                 <div className="text-center">
                   <div className="mb-2">

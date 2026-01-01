@@ -1,81 +1,81 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { analyzeSymptoms, getDoctors, bookAppointment } from '../../../chatbot/chatService';
 import DoctorCard from './DoctorCard';
-import { Send, User, Bot, X } from 'lucide-react';
+import { Send, User, Bot, X, Paperclip, Smile, ArrowLeft } from 'lucide-react';
 import chatbotConfig from '../../../chatbot/chatbot.json';
 import { useAuth } from '../../auth/auth';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// Define the type for a message (adjusting to your existing data structure)
+// Define the type for a message
 type Message = {
-  from: 'user' | 'bot'; // Corresponds to 'role' in the previous example
-  text: string; // Corresponds to 'content'
+  from: 'user' | 'bot';
+  text: string;
 };
 
-const PRIMARY_BLUE = 'blue-600';     // Main accent blue
-const BG_LIGHT = 'white';          // Main background color
-const BOT_BUBBLE_COLOR = 'slate-100'; // Light gray for bot messages
-const TEXT_COLOR = 'slate-800';      // Dark text color
-
-
 /**
- * Chat Header Component (Bright Blue Gradient Theme)
+ * Chat Header Component (Glassmorphism + Primary Gradient)
  */
 const ChatHeader: React.FC<{ onClose: () => void }> = ({ onClose }) => (
-  <header className={`flex items-center justify-between p-4 bg-blue-600 text-white shadow-md`}>
-    <div className="flex items-center space-x-3">
-      <div className="flex items-center space-x-2">
-        <div className="w-10 h-10 rounded-full bg-white/30 flex items-center justify-center border border-white">
-          <Bot size={20} />
-        </div>
-        <div>
-          <h1 className="text-lg font-semibold text-white">Assistant</h1>
-          <p className="text-xs opacity-80">Nexus Clinic</p>
+  <header
+    className="flex items-center justify-between p-5 text-white shadow-lg relative overflow-hidden"
+    style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)' }}
+  >
+    <div className="flex items-center space-x-3 z-10">
+      <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner">
+        <Bot size={24} className="text-white" />
+      </div>
+      <div>
+        <h1 className="text-lg font-bold tracking-tight text-white font-poppins">Assistant</h1>
+        <div className="flex items-center space-x-1.5">
+          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          <p className="text-xs font-medium opacity-90 text-white font-inter">Nexus Clinic Online</p>
         </div>
       </div>
     </div>
-    <div className="flex items-center space-x-3">
-
-      <button
-        onClick={onClose}
-        className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition-colors text-white">
-        <X size={18} />
-      </button>
-    </div>
+    <button
+      onClick={onClose}
+      className="p-2.5 bg-white/10 rounded-xl hover:bg-white/20 transition-all text-white border border-white/10 group active:scale-90"
+    >
+      <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
+    </button>
   </header>
 );
 
 /**
- * Message Bubble Component (Blue/White Theme)
+ * Message Bubble Component (Glassmorphic Bot Bubbles + Gradient User Bubbles)
  */
 const ChatMessage: React.FC<{ message: Message }> = ({ message }) => {
   const isUser = message.from === 'user';
-  const bubbleClasses = isUser
-    ? `text-white bg-blue-600 rounded-br-none ml-auto`
-    : `bg-${BOT_BUBBLE_COLOR} text-${TEXT_COLOR} rounded-tl-none mr-auto border border-slate-200`;
-
-  // Removed the icon circles next to the bubbles for a cleaner look that matches the image's message body
-  const content = isUser ? message.text : (
-    <>
-      {/* Added Bot icon before content for Bot messages, similar to the "Jessica Smith" image */}
-      <div className="flex items-start mb-1 text-slate-500 text-xs">
-        <Bot size={14} className="mr-1 mt-0.5" />
-        Assistant
-      </div>
-      <p className="whitespace-pre-wrap text-sm">{message.text}</p>
-    </>
-  );
 
   return (
-    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
-      <div className={`p-3 rounded-xl shadow-md max-w-[80%] ${bubbleClasses}`}>
-        {isUser ? <p className="whitespace-pre-wrap text-sm">{message.text}</p> : content}
+    <motion.div
+      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-5 px-4`}
+    >
+      <div className={`relative max-w-[85%] px-4 py-3 rounded-2xl shadow-sm ${isUser
+          ? 'text-white rounded-tr-none'
+          : 'bg-white/80 backdrop-blur-sm border border-slate-200 text-slate-800 rounded-tl-none'
+        }`}
+        style={isUser ? { background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)' } : {}}
+      >
+        {!isUser && (
+          <div className="flex items-center space-x-1.5 mb-1.5 text-slate-500 font-semibold text-[10px] uppercase tracking-wider">
+            <Bot size={12} />
+            <span>Nexus Assistant</span>
+          </div>
+        )}
+        <p className="text-[14px] leading-relaxed font-inter font-medium whitespace-pre-wrap">{message.text}</p>
+        <span className={`text-[9px] mt-1.5 block opacity-60 text-right ${isUser ? 'text-blue-100' : 'text-slate-400'}`}>
+          {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 /**
- * Chat Input Component (Blue/White Theme)
+ * Chat Input Component (Minimal Refined Theme)
  */
 const ChatInput: React.FC<{ input: string, setInput: (s: string) => void, sendMessage: (s: string) => Promise<void> }> = ({ input, setInput, sendMessage }) => {
 
@@ -88,29 +88,29 @@ const ChatInput: React.FC<{ input: string, setInput: (s: string) => void, sendMe
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`p-3 border-t border-slate-200 bg-${BG_LIGHT} flex items-center`}>
-      {/* Left Utility Icons (Bot, Clip, Smile) */}
-      <div className="flex space-x-3 text-slate-400 mr-2">
-        <Bot size={22} className="hover:text-slate-600 transition-colors cursor-pointer" />
-        <button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="hover:text-slate-600 transition-colors cursor-pointer"><path d="M15 7h.01"></path><path d="M10 12h.01"></path><path d="M10 17h.01"></path><path d="M9 21h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"></path></svg></button>
-        <button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="hover:text-slate-600 transition-colors cursor-pointer"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></button>
+    <form onSubmit={handleSubmit} className="p-4 bg-white/50 backdrop-blur-md border-t border-slate-100 flex items-center space-x-3">
+      <div className="flex-grow relative group">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask anything..."
+          className="w-full px-5 py-3.5 pr-20 rounded-2xl bg-white border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all text-sm font-medium shadow-sm group-hover:shadow-md"
+        />
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
+          <button type="button" className="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+            <Smile size={20} />
+          </button>
+        </div>
       </div>
 
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Enter your message..."
-        className={`flex-grow p-3 rounded-full bg-slate-50  text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0 transition-all border border-slate-200 text-sm`}
-      />
-
-      {/* Send Button (Large, Circular, Blue Gradient) */}
       <button
         type="submit"
-        className={`p-3 w-12 h-12 ml-2 bg-blue-300 text-white bg-blue-600 rounded-full shadow-lg hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center flex-shrink-0`}
+        className="p-3.5 bg-blue-600 text-white rounded-2xl shadow-lg hover:shadow-blue-500/30 transition-all disabled:opacity-50 disabled:shadow-none active:scale-95 flex items-center justify-center flex-shrink-0"
+        style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)' }}
         disabled={!input.trim()}
       >
-        <Send size={24} />
+        <Send size={22} className={input.trim() ? "translate-x-0.5 -translate-y-0.5" : ""} />
       </button>
     </form>
   );
@@ -144,13 +144,8 @@ export default function ChatWindow({ onClose }: { onClose: () => void }) {
     setMessages(prev => [...prev, { from: 'bot', text }]);
   };
 
-  // --- State and Logic (UNCHANGED) ---
-
   useEffect(() => {
-    // Clear any existing chat history
     localStorage.removeItem('chat_history');
-
-    // Welcome message from JSON
     const welcomeFlow = config.flows.main;
     addBotMessage(welcomeFlow.message);
   }, []);
@@ -181,40 +176,27 @@ export default function ChatWindow({ onClose }: { onClose: () => void }) {
       addBotMessage(message);
       setLoading(false);
 
-
-
       if (flow.type === 'doctor_list') {
         getDoctors().then(docs => {
-          console.log('🔍 API Response:', docs);
-
-          // Backend returns { success: true, doctors: [...] }
           const doctorList = docs.doctors || docs.data || [];
-          const isSuccess = docs.success !== false; // Assume success if not explicitly false
+          const isSuccess = docs.success !== false;
 
           if (isSuccess && Array.isArray(doctorList) && doctorList.length > 0) {
             const specialty = flow.specialty.toLowerCase();
-            console.log('🎯 Looking for specialty:', specialty);
-            console.log('📋 All doctors:', doctorList);
-
             const filtered = doctorList.filter((d: any) => {
-              console.log(`👨‍⚕️ Doctor: ${d.name}, Specialization: "${d.specialization}"`);
               return d.specialization?.toLowerCase().includes(specialty);
             });
 
-            console.log('✅ Filtered doctors:', filtered);
-
             if (filtered.length === 0) {
-              addBotMessage(`Sorry, we don't have any ${flow.specialty} specialists available at the moment. Please try another specialty or contact us directly.`);
+              addBotMessage(`Sorry, we don't have any ${flow.specialty} specialists available at the moment.`);
             } else {
               setRecommendations([{ disease: flow.specialty, doctors: filtered }]);
             }
           } else {
-            console.error('❌ API Error or no doctors:', docs);
-            addBotMessage(`Sorry, I couldn't fetch the doctor list at the moment. Please try again later.`);
+            addBotMessage(`Sorry, I couldn't fetch the doctor list at the moment.`);
           }
         }).catch(err => {
-          console.error('❌ Network Error:', err);
-          addBotMessage(`Sorry, there was an error connecting to the server. Please try again later.`);
+          addBotMessage(`Sorry, there was an error connecting to the server.`);
         });
       }
 
@@ -236,7 +218,7 @@ export default function ChatWindow({ onClose }: { onClose: () => void }) {
           console.error('Bot booking error:', err);
         }
       }
-    }, 600);
+    }, 800);
   };
 
   const handleOptionSelect = (option: any) => {
@@ -272,7 +254,6 @@ export default function ChatWindow({ onClose }: { onClose: () => void }) {
       return;
     }
 
-    // Heuristics for non-input flows
     const lower = text.toLowerCase();
     if (lower.includes('doctor')) {
       handleFlowTransition('find_doctor_specialty');
@@ -295,114 +276,124 @@ export default function ChatWindow({ onClose }: { onClose: () => void }) {
 
 
   async function handleBook(doctorId: string, doctorName: string) {
-    // Save the doctor selection
     const updatedData: Record<string, any> = {
       selected_doctor: doctorName,
       doctorId
     };
 
-    // Check if user is authenticated
     if (isAuthenticated && user) {
-      // Pre-populate user data for authenticated users
       updatedData.patient_name = user.name;
       updatedData.patient_email = user.email;
       updatedData.patient_phone = user.phone || '';
-
       setSessionData(prev => ({ ...prev, ...updatedData }));
-
       addBotMessage(`Excellent choice! I've noted your selection for Dr. ${doctorName}. Let's schedule your appointment.`);
-
-      // Skip to date selection for authenticated users
       handleFlowTransition('appointment_date_selection');
     } else {
-      // Guest user - go through full flow
       setSessionData(prev => ({ ...prev, ...updatedData }));
-
       addBotMessage(`Excellent choice! I've noted your selection for Dr. ${doctorName}.`);
-
-      // Go to appointment_name for guest users
       handleFlowTransition('appointment_name');
     }
   }
 
-  // --- UI START ---
-
   return (
-    <div
-      className={`fixed right-6 flex flex-col border border-slate-300 rounded-xl shadow-2xl overflow-hidden bg-${BG_LIGHT}`}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, y: 100, x: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+      exit={{ opacity: 0, scale: 0.8, y: 100, x: 20 }}
+      className="fixed right-6 flex flex-col rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden border border-white/40 glass-morph"
       style={{
         zIndex: 99999,
-        bottom: '6rem', // Positioned above the chat button
-        width: '40vw', // 40% of viewport width
-        height: '60vh', // 60% of viewport height
-        minWidth: '320px', // Minimum width for smaller screens
-        maxWidth: '400px' // Maximum width for very large screens
+        bottom: '7rem',
+        width: '400px',
+        height: '650px',
+        maxHeight: '80vh',
+        maxWidth: '90vw',
+        background: 'rgba(255, 255, 255, 0.85)',
+        backdropFilter: 'blur(16px)',
       }}
     >
-
-      {/* 1. Header */}
       <ChatHeader onClose={onClose} />
 
-      {/* 2. Message Area */}
       <div
-        className={`flex-grow p-4 overflow-y-auto space-y-4 bg-white custom-scrollbar text-${TEXT_COLOR}`}
+        className="flex-grow p-0 overflow-y-auto space-y-2 bg-transparent custom-scrollbar"
         ref={scrollRef}
       >
-        {messages.map((m, i) => (
-          <ChatMessage key={i} message={m} />
-        ))}
+        <div className="pt-6">
+          {messages.map((m, i) => (
+            <ChatMessage key={i} message={m} />
+          ))}
+        </div>
 
         {loading && (
-          <div className="my-2 flex justify-start">
-            <div className="bg-slate-100 text-slate-800 px-3 py-2 rounded-lg text-sm">Assistant is typing...</div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="px-6 py-2 flex justify-start"
+          >
+            <div className="bg-white/80 backdrop-blur-sm text-slate-400 px-4 py-2 rounded-2xl text-xs font-semibold flex items-center space-x-2 border border-slate-100 shadow-sm">
+              <span className="flex space-x-1">
+                <span className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce"></span>
+                <span className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+              </span>
+              <span>Assistant is typing</span>
+            </div>
+          </motion.div>
         )}
 
-        {/* Dynamic Options from Flow */}
-        <div className="mt-6 flex flex-wrap gap-2 justify-start pb-4">
-          {(config.flows as any)[currentFlowId]?.options?.map((opt: any) => (
-            <button
-              key={opt.id}
-              onClick={() => handleOptionSelect(opt)}
-              className={`px-4 py-2 bg-white border border-blue-500 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-50 transition-all flex items-center gap-2 shadow-sm`}
-            >
-              {opt.label}
-            </button>
-          ))}
+        {/* Dynamic Options */}
+        <div className="px-6 py-4 flex flex-wrap gap-2.5 justify-start">
+          <AnimatePresence>
+            {(config.flows as any)[currentFlowId]?.options?.map((opt: any) => (
+              <motion.button
+                key={opt.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.05, backgroundColor: 'rgba(59, 130, 246, 0.05)' }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleOptionSelect(opt)}
+                className="px-5 py-2.5 bg-white border border-blue-100 text-blue-600 rounded-2xl text-[13px] font-bold hover:border-blue-400 transition-all shadow-sm flex items-center gap-2 group"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-400 group-hover:scale-150 transition-transform"></div>
+                {opt.label}
+              </motion.button>
+            ))}
+          </AnimatePresence>
 
           {currentFlowId !== 'main' && (
-            <button
+            <motion.button
+              whileHover={{ x: -2 }}
               onClick={() => handleFlowTransition('main')}
-              className="px-4 py-2 border border-slate-200 text-slate-500 rounded-full text-sm hover:bg-slate-50"
+              className="px-4 py-2 text-slate-400 hover:text-slate-600 rounded-2xl text-xs font-bold transition-colors flex items-center gap-1.5"
             >
-              Back to Start
-            </button>
+              <ArrowLeft size={14} /> Back to Start
+            </motion.button>
           )}
         </div>
 
-
-
         {/* Recommendations */}
-        <div className="mt-3 space-y-3">
+        <div className="px-6 pb-6 space-y-4">
           {recommendations.map((r: any, idx: number) => (
-            <div key={idx} className="p-3 bg-white rounded-xl shadow-sm border border-slate-200">
-              <div className={`text-sm font-semibold text-${TEXT_COLOR}`}>Doctors for {r.disease}</div>
-              <div className="mt-2 space-y-2">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-5 bg-gradient-to-br from-white to-slate-50 rounded-3xl shadow-sm border border-slate-200"
+            >
+              <div className="text-xs font-black text-slate-400 uppercase tracking-[0.1em] mb-4">Available Specialists</div>
+              <div className="space-y-3">
                 {(r.doctors || []).map((doc: any) => (
-                  <div key={doc._id} className="p-2 bg-slate-100/50 rounded-lg">
+                  <div key={doc._id} className="p-1 rounded-2xl hover:bg-white transition-colors">
                     <DoctorCard doctor={doc} onBook={() => handleBook(doc._id, doc.name)} />
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
 
-
-
-      {/* 3. Input */}
       <ChatInput input={input} setInput={setInput} sendMessage={sendMessage} />
-    </div>
+    </motion.div>
   );
 }

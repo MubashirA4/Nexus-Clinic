@@ -182,19 +182,6 @@ export function OurDoctorsPage() {
                                                     </div>
                                                 </div>
 
-                                                {/* Rating */}
-                                                <div className="flex items-center space-x-2">
-                                                    <div className="p-2 bg-amber-50 rounded-lg">
-                                                        <Star className="w-4 h-4 text-amber-600" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-sm text-slate-500">Rating</p>
-                                                        <div className="flex items-center space-x-1">
-                                                            <span className="font-semibold text-slate-900">{doctor.rating?.toFixed(1)}</span>
-                                                            <span className="text-slate-500 text-xs">({doctor.reviewCount})</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
                                             </div>
                                         </div>

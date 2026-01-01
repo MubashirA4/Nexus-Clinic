@@ -10,8 +10,10 @@ const router = express.Router();
 
 // Public routes
 router.post('/signup', createUsers);
-router.post('/update-profile', updateProfile);
 router.get('/appointments/verify/:token', verifyAppointment);
+
+// Protected routes
+router.post('/update-profile', verifyToken, verifyPatient, updateProfile);
 
 // Create appointment (requires patient auth)
 router.post('/appointments', verifyToken, verifyPatient, createAppointment);

@@ -10,6 +10,7 @@ export interface User {
     age?: number;
     gender?: string;
     address?: string;
+    image?: string;
 }
 
 interface AuthState {
