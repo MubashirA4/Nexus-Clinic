@@ -14,9 +14,9 @@ import { LoginPage } from './components/pages/LoginPage';
 import { SignupPage } from './components/pages/SignupPage';
 import { OurDoctorsPage } from './components/pages/ourDoctorPage';
 import { AboutUs } from './components/pages/AboutUs';
-import { ServicesPage } from './components/pages/ServicesPage';
+import ServicesPage from './components/pages/ServicesPage';
 import { VerifyAppointment } from './components/pages/VerifyAppointment';
-// import ChatWidget from './components/telemedicine/ChatWidget';
+import ChatWidget from './components/telemedicine/ChatWidget';
 
 // Main App Component with conditional navigation
 function AppContent() {
@@ -71,7 +71,7 @@ export default function App() {
       <ScrollToTop />
       <AppContent />
 
-      {/* Global Chatbot Widget - removed */}
+      <ChatWidget />
     </Router>
   );
 }

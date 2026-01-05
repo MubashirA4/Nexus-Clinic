@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Home, Bell, User, LogOut, ChevronDown, Settings } from 'lucide-react';
+import { Home, User, LogOut, ChevronDown, Settings } from 'lucide-react';
 import { useAuth } from '../auth/auth';
 import { useEffect, useState } from 'react';
 import Logo from '@/assets/logo.svg'
@@ -61,15 +61,7 @@ export function DashboardNavbar() {
                 </motion.button>
               </Link>
 
-              {/* Notifications */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative p-2 rounded-lg hover:bg-slate-100"
-              >
-                <Bell className="w-6 h-6 text-slate-700" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-              </motion.button>
+
 
               {/* User Profile Button in Navbar */}
               <div className="relative user-navbar-dropdown">

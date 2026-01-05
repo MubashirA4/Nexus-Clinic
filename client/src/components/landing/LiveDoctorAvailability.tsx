@@ -170,16 +170,6 @@ export function LiveDoctorAvailability() {
                         onError={() => handleImageError(index)}
                       />
                     </div>
-
-                    {/* Status Indicator */}
-                    <div className="absolute top-4 right-4 z-10">
-                      <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${doctor.status === 'online' ? 'bg-green-100 text-green-600' :
-                        doctor.status === 'busy' ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 text-slate-500'
-                        }`}>
-                        <Circle className={`w-2 h-2 fill-current`} />
-                        {doctor.status}
-                      </span>
-                    </div>
                   </div>
 
                   {/* Main Content (hc-teamcard-main) */}

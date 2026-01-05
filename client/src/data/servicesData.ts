@@ -1,4 +1,9 @@
 import RecordImage from '../assets/services/Patient-Records.png';
+import SecureImage from '@/assets/services/Secure1.jpg'
+import AppointmentImage from '@/assets/services/Appointment.jpg'
+import TeleconsultationImage from '@/assets/services/TeleConsultation.png'
+import CalendarImage from '@/assets/services/Calendar.jpeg'
+import NotificationImage from '@/assets/services/notification.jpeg'
 
 export interface Service {
           id: string;
@@ -21,8 +26,8 @@ export const servicesData: Service[] = [
           {
                     id: 'appointment-scheduling',
                     title: 'Online Appointment Scheduling',
-                    description: 'Patients can browse doctor availability, select time slots, and book appointments instantly.',
-                    imageUrl: 'https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=800&h=400&fit=crop',
+                    description: 'Browse through available doctors, select your preferred time slots, and instantly book appointments with our easy-to-use scheduling system designed for your convenience.',
+                    imageUrl: AppointmentImage,
                     color: '#3b82f6',
                     bgColor: 'bg-blue-50',
                     badge: 'Core Feature',
@@ -31,8 +36,8 @@ export const servicesData: Service[] = [
           {
                     id: 'teleconsultation',
                     title: 'Doctor-Patient Teleconsultation',
-                    description: 'Secure video, audio, and chat consultations connecting doctors and patients remotely.',
-                    imageUrl: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=400&fit=crop',
+                    description: 'Connect with certified doctors through secure video, audio, and chat consultations from anywhere, ensuring quality healthcare is always accessible when you need it most.',
+                    imageUrl: TeleconsultationImage,
                     color: '#8b5cf6',
                     bgColor: 'bg-purple-50',
                     longDescription: 'Experience high-quality healthcare from the comfort of your home. Our teleconsultation platform provides secure, high-definition video and audio links to ensure your virtual visit is as effective as an in-person one.',
@@ -40,8 +45,8 @@ export const servicesData: Service[] = [
           {
                     id: 'calendar-management',
                     title: 'Calendar & Availability Management',
-                    description: 'Doctors manage schedules with real-time updates to prevent overlapping appointments.',
-                    imageUrl: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&h=400&fit=crop',
+                    description: 'Doctors efficiently manage their schedules with real-time updates and synchronization, preventing overlapping appointments and ensuring optimal time management for better patient care delivery.',
+                    imageUrl: CalendarImage,
                     color: '#10b981',
                     bgColor: 'bg-green-50',
                     longDescription: 'Efficient calendar management ensures that our medical staff is always where they need to be. By synchronizing multiple schedules in real-time, we eliminate double-bookings and reduce wait times for our patients.',
@@ -49,8 +54,8 @@ export const servicesData: Service[] = [
           {
                     id: 'reminders-notifications',
                     title: 'Reminders & Notifications',
-                    description: 'Automated alerts notify doctors and patients about upcoming appointments.',
-                    imageUrl: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&h=400&fit=crop',
+                    description: 'Receive automated alerts and reminders via email and SMS about your upcoming appointments, ensuring you never miss an important consultation with your healthcare provider.',
+                    imageUrl: NotificationImage,
                     color: '#ef4444',
                     bgColor: 'bg-red-50',
                     longDescription: 'Never miss an appointment again. Our automated notification system sends timely reminders via email and SMS, keeping both patients and healthcare providers informed about their upcoming schedule.',
@@ -58,8 +63,8 @@ export const servicesData: Service[] = [
           {
                     id: 'secure-communication',
                     title: 'Secure Communication',
-                    description: 'End-to-end encrypted consultations ensuring privacy and medical data compliance.',
-                    imageUrl: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=400&fit=crop',
+                    description: 'All consultations are protected with end-to-end encryption technology, ensuring complete privacy and full compliance with medical data protection standards for your peace of mind.',
+                    imageUrl: SecureImage,
                     color: '#f59e0b',
                     bgColor: 'bg-yellow-50',
                     longDescription: 'Your privacy is our priority. All communications through our platform are protected by industry-standard end-to-end encryption, ensuring that your sensitive medical information stays between you and your doctor.',
@@ -67,7 +72,7 @@ export const servicesData: Service[] = [
           {
                     id: 'patient-records',
                     title: 'Patient History & Records',
-                    description: 'Store consultation history, prescriptions, and medical reports for future reference.',
+                    description: 'Securely store and access your complete consultation history, prescriptions, medical reports, and lab results in one convenient location for easy reference and continuity of care.',
                     imageUrl: RecordImage,
                     color: '#6366f1',
                     bgColor: 'bg-indigo-50',

@@ -61,7 +61,7 @@ export function ServicesHome() {
       </div>
 
       {/* Grid Container for 6 Telemedicine Services - KEY FIX */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Add min-h-[600px] to ensure grid items stretch properly */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
           {featuredServices.map((service, index) => (
@@ -78,7 +78,7 @@ export function ServicesHome() {
                 <motion.div
                   whileHover={{ y: -10, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex flex-col h-full bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all cursor-pointer group relative border border-blue-100 overflow-hidden"
+                  className="flex flex-col h-full bg-white rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all cursor-pointer group relative border border-blue-100 overflow-hidden"
                 >
 
                   {/* Image Container - Fixed Height */}
@@ -89,13 +89,13 @@ export function ServicesHome() {
                       src={service.imageUrl}
                       alt={`${service.title} service`}
                       onError={() => handleImageError(service.id)}
-                      className="h-40 w-full object-cover"
+                      className="h-48 w-full object-cover"
                     />
                   </div>
                   {/* Content Section - Takes remaining space */}
                   <div className="flex flex-col flex-grow">
                     <h3 className="mb-3 text-gray-800 text-xl font-semibold">{service.title}</h3>
-                    <p className="text-slate-600 mb-6 flex-grow">{service.description}</p>
+                    <p className="text-slate-600 mb-6  flex-grow">{service.description}</p>
                   </div>
                 </motion.div>
               </Link>

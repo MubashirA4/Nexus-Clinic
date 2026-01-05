@@ -44,7 +44,7 @@
       "contact_us": {
         "id": "contact_us",
         "type": "information",
-        "message": "📞 **Contact Nexus Clinic**\n\n📧 Email: contact@nexusclinic.com\n📱 Phone: +1 (555) 123-4567\n📍 Address: 123 Healthcare Ave, Medical District\n\n🕒 Hours:\nMon-Fri: 8:00 AM - 8:00 PM\nSat-Sun: 9:00 AM - 5:00 PM\n\nHow else can I help you?",
+        "message": "Contact Nexus Clinic\n\n📧 Email: contact@nexusclinic.com\n📱 Phone: +1 (555) 123-4567\n📍 Address: 123 Healthcare Ave, Medical District\n\n🕒 Hours:\nMon-Fri: 8:00 AM - 8:00 PM\nSat-Sun: 9:00 AM - 5:00 PM\n\nHow else can I help you?",
         "options": [
           {
             "id": "doctor",
@@ -64,9 +64,9 @@
         ]
       },
       "about_us": {
-        "id": "about_us",
+        "id": "about Nexus",
         "type": "information",
-        "message": "🏥 **About Nexus Clinic**\n\nNexus Clinic is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and expertise.\n\n✨ **Our Services:**\n• Online Appointment Scheduling\n• Teleconsultation with Specialists\n• Comprehensive Health Records\n• 24/7 Patient Support\n\n👨‍⚕️ **Our Team:**\nExperienced doctors across multiple specialties committed to your health and wellbeing.\n\nWhat would you like to do next?",
+        "message": "About Nexus Clinic \n\nNexus Clinic is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and expertise.\n\n✨ Our Services:\n• Online Appointment Scheduling\n• Teleconsultation with Specialists\n• Comprehensive Health Records\n• 24/7 Patient Support\n\n Our Team:\nExperienced doctors across multiple specialties committed to your health and wellbeing.\n\nWhat would you like to do next?",
         "options": [
           {
             "id": "doctor",
@@ -88,7 +88,7 @@
       "need_help": {
         "id": "need_help",
         "type": "information",
-        "message": "🤝 **How Can We Help?**\n\nI can assist you with:\n\n1️⃣ **Finding a Doctor** - Browse our specialists by specialty\n2️⃣ **Booking Appointments** - Schedule your visit online\n3️⃣ **Contact Information** - Get our phone, email, and address\n4️⃣ **About Our Clinic** - Learn more about our services\n\nPlease select an option below or type your question:",
+        "message": "How Can We Help?\n\nI can assist you with:\n\n1️⃣ Finding a Doctor - Browse our specialists by specialty\n2️⃣ Booking Appointments - Schedule your visit online\n3️⃣ Contact Information - Get our phone, email, and address\n4️⃣ About Our Clinic - Learn more about our services\n\nPlease select an option below or type your question:",
         "options": [
           {
             "id": "doctor",
@@ -148,7 +148,7 @@
         "id": "doctor_list_general",
         "type": "doctor_list",
         "specialty": "General Physician",
-        "message": "👨‍⚕️ **Available General Physicians:**",
+        "message": "Available General Physicians:",
         "doctors": [],
         "next_flow": "appointment_name"
       },
@@ -156,7 +156,7 @@
         "id": "doctor_list_cardiologist",
         "type": "doctor_list",
         "specialty": "Cardiologist",
-        "message": "❤️ **Available Cardiologists:**",
+        "message": "Available Cardiologists:",
         "doctors": [],
         "next_flow": "appointment_name"
       },
@@ -164,7 +164,7 @@
         "id": "doctor_list_dermatologist",
         "type": "doctor_list",
         "specialty": "Dermatologist",
-        "message": "🔬 **Available Dermatologists:**",
+        "message": "Available Dermatologists:",
         "doctors": [],
         "next_flow": "appointment_name"
       },
@@ -172,7 +172,7 @@
         "id": "doctor_list_pediatrician",
         "type": "doctor_list",
         "specialty": "Pediatrician",
-        "message": "👶 **Available Pediatricians:**",
+        "message": "Available Pediatricians:",
         "doctors": [],
         "next_flow": "appointment_name"
       },
@@ -180,7 +180,7 @@
         "id": "doctor_list_orthopedic",
         "type": "doctor_list",
         "specialty": "Orthopedic",
-        "message": "🦴 **Available Orthopedic Specialists:**",
+        "message": "Available Orthopedic Specialists:",
         "doctors": [],
         "next_flow": "appointment_name"
       },
@@ -308,7 +308,7 @@
       "appointment_confirmation": {
         "id": "appointment_confirmation",
         "type": "confirmation",
-        "message_template": "✅ **Verification Email Sent!**\n\n📋 Details:\n• Patient: {patient_name}\n• Doctor: {selected_doctor}\n• Date: {appointment_date}\n• Time: {appointment_time}\n• Phone: {patient_phone}\n\nWe have sent a verification link to your email ({patient_email}). Please click it within 24 hours to confirm your booking.\n\nIs there anything else I can help you with?",
+        "message_template": "Verification Email Sent!\n\n Details:\n• Patient: {patient_name}\n• Doctor: {selected_doctor}\n• Date: {appointment_date}\n• Time: {appointment_time}\n• Phone: {patient_phone}\n\nWe have sent a verification link to your email ({patient_email}). Please click it within 24 hours to confirm your booking.\n\nIs there anything else I can help you with?",
         "options": [
           {
             "id": "main_menu",
