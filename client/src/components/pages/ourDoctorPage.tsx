@@ -146,11 +146,11 @@ export function OurDoctorsPage() {
                                 <div className="text-slate-600 mt-1">Expert Doctors</div>
                             </div>
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600">50K+</div>
+                                <div className="text-4xl font-bold text-blue-600">20K+</div>
                                 <div className="text-slate-600 mt-1">Patients Treated</div>
                             </div>
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600">98%</div>
+                                <div className="text-4xl font-bold text-blue-600">89%</div>
                                 <div className="text-slate-600 mt-1">Satisfaction Rate</div>
                             </div>
                         </div>

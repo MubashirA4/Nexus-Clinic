@@ -15,7 +15,7 @@ export function AboutUs() {
                     },
                     {
                               label: 'Patients Served',
-                              value: '10k+',
+                              value: '1k+',
                               icon: Heart,
                               color: 'from-rose-500 to-pink-500'
                     },
@@ -27,7 +27,7 @@ export function AboutUs() {
                     },
                     {
                               label: 'Success Rate',
-                              value: '98%',
+                              value: '88%',
                               icon: TrendingUp,
                               color: 'from-emerald-500 to-teal-500'
                     },

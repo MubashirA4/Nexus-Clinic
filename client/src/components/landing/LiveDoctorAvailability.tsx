@@ -100,7 +100,7 @@ export function LiveDoctorAvailability() {
               >
                 <Circle className="w-3 h-3 fill-blue-500 text-blue-500" />
               </motion.div>
-              <span className="text-blue-700 font-semibold">Live Doctor Availability</span>
+              <span className="text-blue-700 font-semibold">Doctor Availability</span>
             </div>
             <h2 className="mb-4 text-3xl md:text-4xl font-bold text-gray-900">
               Connect with Our <span className="text-blue-600">Expert Doctors</span>
