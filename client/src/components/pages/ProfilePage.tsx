@@ -258,7 +258,7 @@ export function ProfilePageContent() {
                                                                                                     type="email"
                                                                                                     disabled
                                                                                                     value={formData.email}
-                                                                                                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-100/50 border border-slate-100 text-slate-400 outline-none font-medium cursor-not-allowed"
+                                                                                                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-100/60 border border-slate-100 text-slate-400 outline-none font-medium cursor-not-allowed"
                                                                                           />
                                                                                 </div>
                                                                       </div>

@@ -146,11 +146,11 @@ export function OurDoctorsPage() {
                                 <div className="text-slate-600 mt-1">Expert Doctors</div>
                             </div>
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600">20K+</div>
+                                <div className="text-4xl font-bold text-blue-600">10K+</div>
                                 <div className="text-slate-600 mt-1">Patients Treated</div>
                             </div>
                             <div className="text-center">
-                                <div className="text-4xl font-bold text-blue-600">89%</div>
+                                <div className="text-4xl font-bold text-blue-600">95%</div>
                                 <div className="text-slate-600 mt-1">Satisfaction Rate</div>
                             </div>
                         </div>
@@ -292,7 +292,7 @@ export function OurDoctorsPage() {
                     {filteredDoctors.length === 0 && (
                         <div className="text-center py-16">
                             <div className="text-6xl mb-4">🔍</div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-2">No doctors found</h3>
+                            <h3 className="text-2xl font-bold text-slate-900 mb-2">No doctors Available</h3>
                             <p className="text-slate-600">Try selecting a different specialty</p>
                         </div>
                     )}

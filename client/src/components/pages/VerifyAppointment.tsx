@@ -65,7 +65,7 @@ export const VerifyAppointment = () => {
                                                                       onClick={() => navigate('/login')}
                                                                       className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
                                                             >
-                                                                      Go to Login
+                                                                    Login Here
                                                             </button>
                                                   </div>
                                         )}

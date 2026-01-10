@@ -30,7 +30,7 @@ export default function ServicesPage() {
           const getIcon = (id: string) => iconMap[id] || CheckCircle;
 
           const stats = [
-                    { icon: Users, value: '50K+', label: 'Patients Served' },
+                    { icon: Users, value: '30K+', label: 'Patients Served' },
                     { icon: CheckCircle, value: '98%', label: 'Satisfaction Rate' },
                     { icon: Clock, value: '24/7', label: 'Availability' },
                     { icon: Shield, value: '100%', label: 'HIPAA Compliant' }

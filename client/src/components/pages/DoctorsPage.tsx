@@ -46,7 +46,7 @@ export function DoctorsPage() {
 
     const statusConfig: Record<string, { color: string; text: string; glow: string }> = {
         online: { color: 'bg-green-500', text: 'Available Now', glow: 'shadow-green-500/50' },
-        busy: { color: 'bg-amber-500', text: 'In Consultation', glow: 'shadow-amber-500/50' },
+        busy: { color: 'bg-amber-500', text: 'Busy', glow: 'shadow-amber-500/50' },
         offline: { color: 'bg-slate-400', text: 'Offline', glow: 'shadow-slate-400/50' },
     };
 
