@@ -82,7 +82,7 @@ export function BookingPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h2 className="mb-4">Book Your Appointment</h2>
+          <h2 className="mb-4">Schedule Your Healthcare Appointment</h2>
           <p className="text-xl text-slate-600">
             Complete the steps below to schedule your visit
           </p>

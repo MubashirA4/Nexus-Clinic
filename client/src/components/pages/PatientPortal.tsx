@@ -115,7 +115,7 @@ export function PatientPortal() {
               transition={{ delay: 0.3 }}
               className="text-slate-600"
             >
-              Here's your health overview for today
+Your daily health insights, all in one place
             </motion.p>
           </motion.div>
 

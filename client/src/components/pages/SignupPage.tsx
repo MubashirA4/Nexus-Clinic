@@ -129,8 +129,7 @@ export function SignupPage() {
                                 Profile Completed Successfully!
                             </h3>
                             <p className="text-slate-600">
-                                You can now log in and book appointments.
-                            </p>
+Your account is ready. Log in to schedule appointments seamlessly.                            </p>
                         </div>
                         <div className="space-y-4">
                             <Link

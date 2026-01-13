@@ -152,8 +152,7 @@ export default function ServicesPage() {
                                                                       Why Choose Nexus Clinic?
                                                             </h2>
                                                             <p className="text-xl text-slate-600">
-                                                                      Experience healthcare reimagined for the digital age
-                                                            </p>
+Transforming healthcare through intelligent, digital solutions                                                            </p>
                                                   </div>
 
                                                   <div className="grid md:grid-cols-3 gap-8">
