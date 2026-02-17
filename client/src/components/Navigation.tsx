@@ -1,9 +1,18 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Phone, Calendar, User, Activity, ChevronDown, LogOut } from 'lucide-react';
-import { useAuth } from '../components/auth/auth'; // Import the custom hook
-import Logo from '@/assets/Logo.svg'
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  Menu,
+  X,
+  Phone,
+  Calendar,
+  User,
+  Activity,
+  ChevronDown,
+  LogOut,
+} from "lucide-react";
+import { useAuth } from "../components/auth/auth"; // Import the custom hook
+import Logo from "@/assets/logo.svg";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,27 +26,27 @@ export function Navigation() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: any) => {
-      if (dropdownOpen && !e.target.closest('.user-dropdown')) {
+      if (dropdownOpen && !e.target.closest(".user-dropdown")) {
         setDropdownOpen(false);
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, [dropdownOpen]);
 
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About Us' },
-    { path: '/services', label: 'Services' },
-    { path: '/ourdoctors', label: 'Our Doctors' },
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About Us" },
+    { path: "/services", label: "Services" },
+    { path: "/ourdoctors", label: "Our Doctors" },
   ];
 
   const handleLogout = () => {
@@ -54,12 +63,13 @@ export function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? 'bg-white/95 backdrop-blur-lg shadow-lg'
-          : location.pathname === '/'
-            ? 'bg-white/10 text-white backdrop-blur-md border-b border-white/10'
-            : 'bg-white/95 backdrop-blur-lg shadow-lg'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-lg shadow-lg"
+            : location.pathname === "/"
+              ? "bg-white/10 text-white backdrop-blur-md border-b border-white/10"
+              : "bg-white/95 backdrop-blur-lg shadow-lg"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
@@ -82,12 +92,13 @@ export function Navigation() {
                 <Link key={link.path} to={link.path}>
                   <motion.span
                     whileHover={{ scale: 1.05 }}
-                    className={`relative px-2 py-1 transition-colors font-medium ${location.pathname === link.path
-                      ? 'text-blue-600'
-                      : location.pathname === '/' && !scrolled
-                        ? 'text-white/90 hover:text-white'
-                        : 'text-slate-700 hover:text-blue-600'
-                      }`}
+                    className={`relative px-2 py-1 transition-colors font-medium ${
+                      location.pathname === link.path
+                        ? "text-blue-600"
+                        : location.pathname === "/" && !scrolled
+                          ? "text-white/90 hover:text-white"
+                          : "text-slate-700 hover:text-blue-600"
+                    }`}
                   >
                     {link.label}
                     {location.pathname === link.path && (
@@ -109,22 +120,37 @@ export function Navigation() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-colors ${location.pathname === '/' && !scrolled ? 'hover:bg-white/10' : 'hover:bg-slate-100'
-                      }`}
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-colors ${
+                      location.pathname === "/" && !scrolled
+                        ? "hover:bg-white/10"
+                        : "hover:bg-slate-100"
+                    }`}
                   >
                     <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold shadow-md overflow-hidden">
                       {user?.image ? (
-                        <img src={user.image} alt="" className="w-full h-full object-cover object-top" />
+                        <img
+                          src={user.image}
+                          alt=""
+                          className="w-full h-full object-cover object-top"
+                        />
                       ) : (
-                        user?.name?.charAt(0) || 'U'
+                        user?.name?.charAt(0) || "U"
                       )}
                     </div>
-                    <span className={`font-medium transition-colors ${location.pathname === '/' && !scrolled ? 'text-white' : 'text-slate-700'
-                      }`}>
-                      {user?.name?.split(' ')[0] || 'User'}
+                    <span
+                      className={`font-medium transition-colors ${
+                        location.pathname === "/" && !scrolled
+                          ? "text-white"
+                          : "text-slate-700"
+                      }`}
+                    >
+                      {user?.name?.split(" ")[0] || "User"}
                     </span>
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''
-                      } ${location.pathname === '/' && !scrolled ? 'text-white/70' : 'text-slate-500'}`} />
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-300 ${
+                        dropdownOpen ? "rotate-180" : ""
+                      } ${location.pathname === "/" && !scrolled ? "text-white/70" : "text-slate-500"}`}
+                    />
                   </motion.button>
 
                   {/* Dropdown Menu */}
@@ -141,16 +167,28 @@ export function Navigation() {
                           <div className="flex items-center space-x-3">
                             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg overflow-hidden">
                               {user?.image ? (
-                                <img src={user.image} alt="" className="w-full h-full object-cover object-top" />
+                                <img
+                                  src={user.image}
+                                  alt=""
+                                  className="w-full h-full object-cover object-top"
+                                />
                               ) : (
-                                user?.name?.charAt(0) || 'U'
+                                user?.name?.charAt(0) || "U"
                               )}
                             </div>
                             <div>
-                              <p className="font-semibold text-slate-900">{user?.name || 'User'}</p>
-                              <p className="text-sm text-slate-500">{user?.email || ''}</p>
+                              <p className="font-semibold text-slate-900">
+                                {user?.name || "User"}
+                              </p>
+                              <p className="text-sm text-slate-500">
+                                {user?.email || ""}
+                              </p>
                               <p className="text-xs text-slate-400 mt-1">
-                                {user?.role === 'doctor' ? 'Doctor' : user?.role === 'admin' ? 'Administrator' : 'Patient'}
+                                {user?.role === "doctor"
+                                  ? "Doctor"
+                                  : user?.role === "admin"
+                                    ? "Administrator"
+                                    : "Patient"}
                               </p>
                             </div>
                           </div>
@@ -158,8 +196,13 @@ export function Navigation() {
 
                         <div className="py-2">
                           <Link
-                            to={user?.role === 'doctor' ? '/doctor-dashboard' :
-                              user?.role === 'admin' ? '/admin-dashboard' : '/patient-dashboard'}
+                            to={
+                              user?.role === "doctor"
+                                ? "/doctor-dashboard"
+                                : user?.role === "admin"
+                                  ? "/admin-dashboard"
+                                  : "/patient-dashboard"
+                            }
                             onClick={() => setDropdownOpen(false)}
                             className="flex items-center px-4 py-3 text-slate-700 hover:bg-slate-50 transition-colors"
                           >
@@ -200,18 +243,26 @@ export function Navigation() {
               ) : (
                 <Link
                   to="/login"
-                  className={`font-medium transition-colors px-4 py-2 ${location.pathname === '/' && !scrolled
-                    ? 'text-white/90 hover:text-white'
-                    : 'text-slate-700 hover:text-blue-600'
-                    }`}
+                  className={`font-medium transition-colors px-4 py-2 ${
+                    location.pathname === "/" && !scrolled
+                      ? "text-white/90 hover:text-white"
+                      : "text-slate-700 hover:text-blue-600"
+                  }`}
                 >
                   Sign In
                 </Link>
               )}
 
               <motion.button
-                onClick={() => navigate(isAuthenticated ? '/booking' : '/login?redirect=/booking')}
-                whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(59, 130, 246, 0.3)' }}
+                onClick={() =>
+                  navigate(
+                    isAuthenticated ? "/booking" : "/login?redirect=/booking",
+                  )
+                }
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-lg"
               >
@@ -223,12 +274,17 @@ export function Navigation() {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsOpen(!isOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${location.pathname === '/' && !scrolled
-                ? 'text-white hover:bg-white/10'
-                : 'text-slate-900 hover:bg-slate-100'
-                }`}
+              className={`lg:hidden p-2 rounded-lg transition-colors ${
+                location.pathname === "/" && !scrolled
+                  ? "text-white hover:bg-white/10"
+                  : "text-slate-900 hover:bg-slate-100"
+              }`}
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </motion.button>
           </div>
         </div>
@@ -238,7 +294,7 @@ export function Navigation() {
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               className="lg:hidden bg-white border-t border-slate-200"
             >
@@ -253,10 +309,11 @@ export function Navigation() {
                     <Link
                       to={link.path}
                       onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-3 rounded-lg ${location.pathname === link.path
-                        ? 'bg-blue-50 text-blue-600'
-                        : 'text-slate-700 hover:bg-slate-50'
-                        }`}
+                      className={`block px-4 py-3 rounded-lg ${
+                        location.pathname === link.path
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-700 hover:bg-slate-50"
+                      }`}
                     >
                       {link.label}
                     </Link>
@@ -275,20 +332,33 @@ export function Navigation() {
                       <div className="flex items-center space-x-3 mb-3">
                         <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold overflow-hidden">
                           {user?.image ? (
-                            <img src={user.image} alt="" className="w-full h-full object-cover" />
+                            <img
+                              src={user.image}
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
                           ) : (
-                            user?.name?.charAt(0) || 'U'
+                            user?.name?.charAt(0) || "U"
                           )}
                         </div>
                         <div>
-                          <p className="font-semibold text-slate-900">{user?.name || 'User'}</p>
-                          <p className="text-sm text-slate-500">{user?.email || ''}</p>
+                          <p className="font-semibold text-slate-900">
+                            {user?.name || "User"}
+                          </p>
+                          <p className="text-sm text-slate-500">
+                            {user?.email || ""}
+                          </p>
                         </div>
                       </div>
                       <div className="space-y-2">
                         <Link
-                          to={user?.role === 'doctor' ? '/doctor-dashboard' :
-                            user?.role === 'admin' ? '/admin-dashboard' : '/patient-dashboard'}
+                          to={
+                            user?.role === "doctor"
+                              ? "/doctor-dashboard"
+                              : user?.role === "admin"
+                                ? "/admin-dashboard"
+                                : "/patient-dashboard"
+                          }
                           onClick={() => setIsOpen(false)}
                           className="block px-4 py-2 text-slate-700 hover:bg-slate-50 rounded-lg"
                         >
@@ -340,7 +410,14 @@ export function Navigation() {
                   className="pt-4 border-t border-slate-200"
                 >
                   <button
-                    onClick={() => { setIsOpen(false); navigate(isAuthenticated ? '/booking' : '/login?redirect=/booking'); }}
+                    onClick={() => {
+                      setIsOpen(false);
+                      navigate(
+                        isAuthenticated
+                          ? "/booking"
+                          : "/login?redirect=/booking",
+                      );
+                    }}
                     className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-lg"
                   >
                     Book Appointment
@@ -353,7 +430,7 @@ export function Navigation() {
       </motion.nav>
 
       {/* Spacer - only shown on other pages to prevent content hiding behind navbar */}
-      {location.pathname !== '/' && <div className="h-20" />}
+      {location.pathname !== "/" && <div className="h-20" />}
     </>
   );
 }
