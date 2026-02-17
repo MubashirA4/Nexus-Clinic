@@ -1,8 +1,8 @@
 import RecordImage from '../assets/services/Patient-Records.png';
 import SecureImage from '@/assets/services/Secure1.jpg'
-import AppointmentImage from '@/assets/services/Appointment.jpg'
-import TeleconsultationImage from '@/assets/services/TeleConsultation.png'
-import CalendarImage from '@/assets/services/Calendar.jpeg'
+import AppointmentImage from '@/assets/services/appointment.jpg'
+import TeleConsultationImage from '@/assets/services/TeleConsultation.png'
+import CalendarImage from '@/assets/services/calendar.jpeg'
 import NotificationImage from '@/assets/services/notification.jpeg'
 
 export interface Service {
@@ -37,7 +37,7 @@ export const servicesData: Service[] = [
                     id: 'teleconsultation',
                     title: 'Doctor-Patient Teleconsultation',
                     description: 'Connect with certified doctors through secure video, audio, and chat consultations from anywhere, ensuring quality healthcare is always accessible when you need it most.',
-                    imageUrl: TeleconsultationImage,
+                    imageUrl: TeleConsultationImage,
                     color: '#8b5cf6',
                     bgColor: 'bg-purple-50',
                     longDescription: 'Experience high-quality healthcare from the comfort of your home. Our teleconsultation platform provides secure, high-definition video and audio links to ensure your virtual visit is as effective as an in-person one.',
